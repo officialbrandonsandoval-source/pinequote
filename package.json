@@ -1,0 +1,11 @@
+{
+  "name": "pinequote",
+  "version": "1.0.0",
+  "description": "PineQuote: instant satellite quotes for outdoor service work, by Iron and Pine Outdoor Co.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test/run-tests.js"
+  },
+  "license": "MIT"
+}

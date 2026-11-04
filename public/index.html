@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PineQuote, instant satellite quotes for outdoor service work</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <h1>PineQuote</h1>
+  <p class="tag">Instant satellite quotes for fall cleanup and snow, by Iron and Pine Outdoor Co.</p>
+</header>
+
+<main>
+  <section class="card">
+    <h2>Step 1: The yard</h2>
+    <label>Property address
+      <input id="address" type="text" placeholder="Street address, town, state">
+    </label>
+    <label>Service
+      <select id="service">
+        <option value="fall">Fall cleanup</option>
+        <option value="snow">Snow removal, season contract</option>
+        <option value="both">Fall cleanup and snow</option>
+      </select>
+    </label>
+    <label>Parcel size in acres (from the county record or your best knowledge)
+      <input id="gross" type="number" step="0.01" min="0.05" max="5" value="0.29">
+    </label>
+    <div class="row">
+      <button id="loadClient">Load the the client test yard</button>
+      <button id="loadEsri" class="ghost">See the classifier on real satellite imagery</button>
+    </div>
+    <p class="fine" id="imageryNote">Demo imagery is a bundled sample tile. In production the tile is pulled for the entered address.</p>
+  </section>
+
+  <section class="card">
+    <h2>Step 2: Satellite segmentation</h2>
+    <div class="tiles">
+      <figure><canvas id="tileCanvas" width="512" height="512"></canvas><figcaption>Satellite tile</figcaption></figure>
+      <figure><canvas id="overlayCanvas" width="512" height="512"></canvas><figcaption>Classes: lawn, canopy, hardscape</figcaption></figure>
+    </div>
+    <button id="runSeg" disabled>Run segmentation</button>
+    <div id="segStats" class="stats"></div>
+  </section>
+
+  <section class="card">
+    <h2>Step 3: The quote</h2>
+    <button id="buildQuote" disabled>Build my quote</button>
+    <div id="quoteOut"></div>
+  </section>
+
+  <section class="card fine">
+    <h2>What is real in this demo, and what is not</h2>
+    <ul>
+      <li>Real: the pricing engine is the live Iron and Pine price book. The segmentation math runs on the tile pixels in your browser. The client test yard reproduces the hand measured quote.</li>
+      <li>Real: leaf and needle work is blown to the tree line only. There is no haul away add on anywhere in this price book.</li>
+      <li>Demo stand in: the client tile is a sample tile drawn to the measured proportions of that yard, and the quote copy is written by local templates. The production wiring swaps segmentation to SAM 3.1 and copy to a Meta model through the Meta Model API. The code marks both swap points.</li>
+    </ul>
+  </section>
+</main>
+
+<footer><p>PineQuote, built for the Meta Global AI Developer Hackathon, Startup track, theme Build for Your World.</p></footer>
+<script src="segment.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
